@@ -27,8 +27,6 @@ const handleSubmit = async () => {
         return;
     }
 
-    console.log('Form submitted', email.value);
-
     try {
         await auth.login(email.value)
         toast.success('Check your email for OTP.', {
