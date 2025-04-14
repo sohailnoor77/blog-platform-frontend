@@ -68,6 +68,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+    window.scrollTo(0, 0); // Scroll to top on mount
     fetchBlogs();
     window.addEventListener('scroll', handleScroll);
 });

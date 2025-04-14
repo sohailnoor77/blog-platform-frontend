@@ -57,9 +57,6 @@ const submitComment = async () => {
             body: state.commentBody,
         });
 
-        console.log('====================================');
-        console.log('data', data);
-        console.log('====================================');
         state.blog.comments.unshift(data.comment);
         state.commentBody = '';
         toast.success('Comment posted successfully.', {
@@ -77,12 +74,9 @@ const submitComment = async () => {
 };
 
 onMounted(() => {
+    window.scrollTo(0, 0);
     fetchBlog();
 });
-
-console.log('====================================');
-console.log('state', state.blog.comments);
-console.log('====================================');
 </script>
 
 <template>
@@ -94,9 +88,10 @@ console.log('====================================');
         <div class="flex items-center justify-between mb-12">
             <BackBtn url="/" />
         </div>
+
         <div class="flex flex-col items-center mb-10">
             <h2 class="text-3xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-4xl">{{ state.blog.title
-            }}
+                }}
             </h2>
             <p class="mt-2 text-lg/8 text-gray-600">{{ state.blog.excerpt }}</p>
 

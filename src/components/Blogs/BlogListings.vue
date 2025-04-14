@@ -68,6 +68,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+    window.scrollTo(0, 0);
     fetchBlogs();
     window.addEventListener('scroll', handleScroll);
 });

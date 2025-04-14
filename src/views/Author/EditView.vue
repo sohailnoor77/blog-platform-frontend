@@ -49,7 +49,28 @@ const fetchBlog = async () => {
 
         oldImageUrl.value = data.blog.image;
     } catch (error) {
-        console.error('Error fetching blogs:', error);
+        if (error.response?.status === 401) {
+            if (error.response.data.message) {
+                toast.error(error.response.data.message, {
+                    position: 'top-right',
+                    duration: 5000,
+                });
+            }
+        } else if (error.response?.status === 403) {
+            if (error.response.data.error) {
+                toast.error(error.response.data.error, {
+                    position: 'top-right',
+                    duration: 5000,
+                });
+
+                router.push('/author/blogs');
+            }
+        } else {
+            toast.error('Server Error - ' + error, {
+                position: 'top-right',
+                duration: 5000,
+            });
+        }
     } finally {
         state.isLoading = false;
     }
@@ -91,7 +112,7 @@ const handleSubmit = async () => {
             position: 'top-right',
             duration: 5000,
         });
-        router.push('/author/blogs');
+        router.push(`/author/blogs/${blogId}`);
     } catch (error) {
         if (error.response?.status === 422) {
             const serverErrors = error.response.data.errors
